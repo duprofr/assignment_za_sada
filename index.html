@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch("quiz.json").then(function(response){
+            if(!response.ok){
+                throw("Error while reading file.");
+            }
+            return response.json()
+        }).then(function(quiz){
+           
+            document.body.innerHTML +=`<p>` + quiz.question + `</p>`;
+            
+            for( let i = 0; i < quiz.options.length; i++){
+                
+                
+                document.body.innerHTML +=`<ul>` + quiz.options[i] + `</ul>`;
+              
+                
+            }
+            document.body.innerHTML +=`<p>` + quiz.answer + `</p>`;
+        }).catch(function(err){
+            console.log("Fetch problem " + err.message);
+        });
+    </script>
+</body>
+</html>
